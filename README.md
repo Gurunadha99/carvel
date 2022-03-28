@@ -1,5 +1,10 @@
 # carvel
 Jenkins Package 
+Jenkins is an open source Continuous Integration and Continuous Delivery (CI/CD) server designed to automate the building, testing, and deploying of any software project.
+
+Configuration Reference
+
+You can configure the following:
 
 |Parameter|Description|Type|Default|
 |---------|-----------|----|-------|
@@ -40,8 +45,8 @@ Jenkins Package
 |securityContext.runAsUser|Jenkins volumeMounts securityContext runAsUser|integer|1001|
 |ports.containerPort|Jenkins container port|integer|9118|
 |ports.livenessProbe.initialDelaySeconds|Initial delay seconds for livenessProbe volumeMounts|integer|15|
-|ports.livenessProbe.timeoutSeconds|Timeout seconds for livenessProbe volumeMounts|integer	5|
-|ports.readinessProbe.initialDelaySeconds|Initial delay seconds for readinessProbe volumeMounts|integer	5|
+|ports.livenessProbe.timeoutSeconds|Timeout seconds for livenessProbe volumeMounts|integer|5|
+|ports.readinessProbe.initialDelaySeconds|Initial delay seconds for readinessProbe volumeMounts|integer|5|
 |ports.readinessProbe.timeoutSeconds|Timeout seconds for readinessProbe volumeMounts|integer|1|
 |initContainers.enabled|		|boolean|FALSE|
 |ingress.enabled|		|boolea|FALSE|
@@ -49,3 +54,6 @@ Jenkins Package
 |ingress.pathType|Ingress path type|string|ImplementationSpecific|
 |metrics.enabled|		|boolean|FALSE|
 |metrics.serviceMonitor.enabled| |boolean|FALSE|
+|resources.limits|The resources limits for the Jenkins container|string|{}|
+|resources.requests.cpu|Cpu for the Jenkins container|integer|300m|
+|resources.requests.memory|Memory for the Jenkins container|integer|512Mi|
