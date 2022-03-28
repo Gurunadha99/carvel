@@ -9,7 +9,7 @@ Jenkins Package
 |persistentVolumeClaim.storage|Jenkins persistent volume size|string|8Gi|
 |persistentVolumeClaim.storageClassName|Jenkins storage class name|string|default|
 |imagePullPolicy|Jenkins image pull policy|string|IfNotPresent|
-|jenkinsPassword|Jenkins userpassword|string|SW16amZ5amw3Tg==|
+|jenkinsPassword|Jenkins userpassword|string|admin1|
 |serviceAccountName|Jenkins pod service account name|string|default|
 |metricsService.prometheus.io/port|Jenkins prometheus.io/port|integer|9122|
 |metricsService.port|Jenkins exporter service port|integer|9122|
