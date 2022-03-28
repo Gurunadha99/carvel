@@ -19,7 +19,7 @@ Jenkins Package
 |container.securityContext.runAsNonRoot|Set Jenkins container's Security Context runAsNonRoot|boolean|TRUE|
 |container.securityContext.runAsUser|Set Jenkins container's Security Context runAsUser|integer|1001|
 |container.env.jenkinsHomepath|Jenkins home directory	string|/bitnami/jenkins/home|
-|container.env.jenkisHost|Set Jenkins Host|string|jenkins.local|
+|container.env.jenkinsHost|Set Jenkins Host|string|jenkins.local|
 |container.env.jenkinsHttp|Set Jenkins HTTP External port|integer|80|
 |container.env.jenkinsHttps|Set Jenkins HTTPs External port|integer|443|
 |startupProbe.failureThreshold|Failure threshold for startupProbe|integer|6|
