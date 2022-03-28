@@ -2,29 +2,31 @@
 Jenkins Package 
 Jenkins is an open source Continuous Integration and Continuous Delivery (CI/CD) server designed to automate the building, testing, and deploying of any software project.
 
-Configuration Reference
+## **Configuration Reference**
 
 You can configure the following:
 
+### Jenkins Image parameters
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
+|imagePullPolicy|Jenkins image pull policy|string|IfNotPresent|
+
+### Jenkins Configuration parameters
 |Parameter|Description|Type|Default|
 |---------|-----------|----|-------|
 |jenkinsUsername|Jenkins username|string|user|
-|service.http|Jenkins service HTTP port|integer|80|
-|service.https|Jenkins service HTTPs port|integer|443|
-|persistentVolumeClaim.storage|Jenkins persistent volume size|string|8Gi|
-|persistentVolumeClaim.storageClassName|Jenkins storage class name|string|default|
-|imagePullPolicy|Jenkins image pull policy|string|IfNotPresent|
 |jenkinsPassword|Jenkins userpassword|string|admin1|
+|container.env.jenkinsHomepath|Jenkins home directory|string|/bitnami/jenkins/home|
+|container.env.jenkinsHost|Set Jenkins Host|string|jenkins.local|
+
+### Jenkins deployment parameters
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |serviceAccountName|Jenkins pod service account name|string|default|
-|metricsService.prometheus.io/port|Jenkins prometheus.io/port|integer|9122|
-|metricsService.port|Jenkins exporter service port|integer|9122|
-|metricsService.fsGroup|Set Jenkins Server pod's Security Context fsGroup|integer|1001|
 |containerPorts.http|Jenkins  HTTP container port|integer|8080|
 |containerPorts.https|Jenkins  HTTPs container port|integer|8443|
-|container.securityContext.runAsNonRoot|Set Jenkins container's Security Context runAsNonRoot|boolean|TRUE|
+|container.securityContext.runAsNonRoot|Set Jenkins container's Security Context runAsNonRoot|boolean|true|
 |container.securityContext.runAsUser|Set Jenkins container's Security Context runAsUser|integer|1001|
-|container.env.jenkinsHomepath|Jenkins home directory	string|/bitnami/jenkins/home|
-|container.env.jenkinsHost|Set Jenkins Host|string|jenkins.local|
 |container.env.jenkinsHttp|Set Jenkins HTTP External port|integer|80|
 |container.env.jenkinsHttps|Set Jenkins HTTPs External port|integer|443|
 |startupProbe.failureThreshold|Failure threshold for startupProbe|integer|6|
@@ -48,12 +50,31 @@ You can configure the following:
 |ports.livenessProbe.timeoutSeconds|Timeout seconds for livenessProbe volumeMounts|integer|5|
 |ports.readinessProbe.initialDelaySeconds|Initial delay seconds for readinessProbe volumeMounts|integer|5|
 |ports.readinessProbe.timeoutSeconds|Timeout seconds for readinessProbe volumeMounts|integer|1|
-|initContainers.enabled|		|boolean|FALSE|
-|ingress.enabled|		|boolea|FALSE|
+|initContainers.enabled|Enable initContainers|boolean|false|
+
+### Traffic Exposure Parameters
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
+|service.http|Jenkins service HTTP port|integer|80|
+|service.https|Jenkins service HTTPs port|integer|443| 
+|ingress.enabled|Enable ingress record generation for Jenkins|boolea|false|
 |ingress.host|Default host for the ingress record|string|jenkins.local|
 |ingress.pathType|Ingress path type|string|ImplementationSpecific|
-|metrics.enabled|		|boolean|FALSE|
-|metrics.serviceMonitor.enabled| |boolean|FALSE|
+
+### Persistence Parameters
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
+|persistentVolumeClaim.storage|Jenkins persistent volume size|string|8Gi|
+|persistentVolumeClaim.storageClassName|Jenkins storage class name|string|default|
+
+### Metrics Parameters
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
+|metrics.enabled|Start a sidecar prometheus exporter to expose Jenkins metrics|boolean|false|
+|metrics.serviceMonitor.enabled| |boolean|false|
+|metricsService.prometheus.io/port|Jenkins prometheus.io/port|integer|9122|
+|metricsService.port|Jenkins exporter service port|integer|9122|
+|metricsService.fsGroup|Set Jenkins Server pod's Security Context fsGroup|integer|1001|
 |resources.limits|The resources limits for the Jenkins container|string|{}|
 |resources.requests.cpu|Cpu for the Jenkins container|integer|300m|
 |resources.requests.memory|Memory for the Jenkins container|integer|512Mi|
