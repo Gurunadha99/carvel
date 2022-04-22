@@ -9,11 +9,18 @@ Configuration Reference
 
 You can configure the following:
 
+## MySQL common parameters
+
 |Parameter|Description|Type|Default|
 |---------|-----------|----|-------|
 |image.pullPolicy|MySQL image pull policy|string|IfNotPresent|
 |auth.rootPassword|Password for the root user Ignored if existing secret is provided|string|admin1|
 |auth.Password|Password for the new user Ignored if existing secret is provided	string|mysqlpassword|
+
+## MySQL Primary parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |primary.podSecurityContext.fsGroup|Group ID for the mounted volumes filesystem|integer|1001|
 |primary.containerSecurityContext.runAsUser|User ID for the MySQL primary container|integer|1001|
 |primary.livenessProbe.enabled|Enable livenessProbe|string|true|
@@ -34,8 +41,24 @@ You can configure the following:
 |primary.startupProbe.timeoutSeconds	|Timeout seconds for startupProbe	|integer|	1|
 |primary.startupProbe.failureThreshold	|Failure threshold for startupProbe|	integer	10|
 |primary.startupProbe.successThreshold	|Success threshold for startupProbe|integer|1|
-|secondary.replicaCount	|Number of MySQL secondary replicas	|integer	|1|
 |primary.persistence.size	|MySQL primary persistent volume size|	integer|8Gi|
+|initContainers.enabled|Enable initContainers|string|false|
+
+## MySQL Secondary parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
+|secondary.replicaCount	|Number of MySQL secondary replicas	|integer	|1|
+
+## Network Policy parameters
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
+|networkpolicy.enabled|Enable networkpolicy|string|false|
+
+## Metrics parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |metrics.enabled	|Start a side-car prometheus exporter	|string|false|
 |metrics.service.port|	MySQL Prometheus Exporter service port|	integer|9104|
 |metrics.livenessProbe. enabled	|Enable livenessProbe	|string|true|
@@ -50,8 +73,3 @@ You can configure the following:
 |metrics.readinessProbe. timeoutSeconds	|Timeout seconds for readinessProbe|	integer|	1|
 |metrics.readinessProbe.failureThreshold	|Failure threshold for readinessProbe	|integer|	3|
 |metrics.readinessProbe.successThreshold|Success threshold for readinessProbe|integer|1|
-|networkpolicy.enabled|Enable networkpolicy|string|false|
-|initContainers.enabled|Enable initContainers|string|false|
-
-
-
