@@ -1,80 +1,50 @@
 # carvel
-Jenkins Package 
-Jenkins is an open source Continuous Integration and Continuous Delivery (CI/CD) server designed to automate the building, testing, and deploying of any software project.
+Mysql Package 
+MySQL is a fast, reliable, scalable, and easy to use open source relational database system. Designed to handle mission-critical, heavy-load production applications
 
-## **Configuration Reference**
-
-You can configure the following:
-
-### Jenkins Image parameters
 |Parameter|Description|Type|Default|
 |---------|-----------|----|-------|
-|imagePullPolicy|Jenkins image pull policy|string|IfNotPresent|
+|image.pullPolicy|MySQL image pull policy|string|IfNotPresent|
+|auth.rootPassword|Password for the root user Ignored if existing secret is provided|string|admin1|
+|auth.Password|Password for the new user Ignored if existing secret is provided	string|mysqlpassword|
+|primary.podSecurityContext.fsGroup|Group ID for the mounted volumes filesystem|integer|1001|
+|primary.containerSecurityContext.runAsUser|User ID for the MySQL primary container|integer|1001|
+|primary.livenessProbe.enabled|Enable livenessProbe|string|true|
+|primary.livenessProbe.initialDelaySeconds|Initial delay seconds for livenessProbe|integer|5|
+|primary.livenessProbe.periodSeconds|Period seconds for livenessProbe|integer|10|
+|primary.livenessProbe.timeoutSeconds|Timeout seconds for livenessProbe|integer|1|
+|primary.livenessProbe.failureThreshold|Failure threshold for livenessProbe|integer|3|
+|primary.livenessProbe.successThreshold|Success threshold for livenessProbe|integer|1|
+|primary.readinessProbe.enabled|Enable readinessProbe	string|true|
+|primary.readinessProbe.initialDelaySeconds|Initial delay seconds for readinessProbe|integer|5|
+|primary.readinessProbe.periodSeconds	|Period seconds for readinessProbe|integer|10|
+|primary.readinessProbe.timeoutSeconds	|Timeout seconds for readinessProbe|	integer|	1|
+|primary.readinessProbe.failureThreshold	|Failure threshold for readinessProbe	|integer|	3|
+|primary.readinessProbe.successThreshold	|Success threshold for readinessProbe|	integer|	1|
+|primary.startupProbe.enabled|Enable startupProbe|string|true|
+|primary.startupProbe.initialDelaySeconds|Initial delay seconds for startupProbe|integer|15|
+|primary.startupProbe.periodSeconds	|Period seconds for startupProbe	|integer|	10|
+|primary.startupProbe.timeoutSeconds	|Timeout seconds for startupProbe	|integer|	1|
+|primary.startupProbe.failureThreshold	|Failure threshold for startupProbe|	integer	10|
+|primary.startupProbe.successThreshold	|Success threshold for startupProbe|integer|1|
+|secondary.replicaCount	|Number of MySQL secondary replicas	|integer	|1|
+|primary.persistence.size	|MySQL primary persistent volume size|	integer|8Gi|
+|metrics.enabled	|Start a side-car prometheus exporter	|string|false|
+|metrics.service.port|	MySQL Prometheus Exporter service port|	integer|9104|
+|metrics.livenessProbe. enabled	|Enable livenessProbe	|string|true|
+|metrics.livenessProbe.initialDelaySeconds	|Initial delay seconds for livenessProbe|integer|120|
+|metrics.livenessProbe.periodSeconds	|Period seconds for livenessProbe	|integer	|10|
+|metrics.livenessProbe.timeoutSeconds	|Timeout seconds for livenessProbe|	integer|	1|
+|metrics.livenessProbe.failureThreshold	|Failure threshold for livenessProbe|	integer|	3|
+|metrics.livenessProbe.successThreshold	|Success threshold for livenessProbe|	integer|	1|
+|metrics. readinessProbe.enabled	|Enable readinessProbe	|string|true|
+|metrics.readinessProbe.initialDelaySeconds|	Initial delay seconds for readinessProbe|integer|30|
+|metrics.readinessProbe.periodSeconds	|Period seconds for readinessProbe	|integer|	10|
+|metrics.readinessProbe. timeoutSeconds	|Timeout seconds for readinessProbe|	integer|	1|
+|metrics.readinessProbe.failureThreshold	|Failure threshold for readinessProbe	|integer|	3|
+|metrics.readinessProbe.successThreshold|Success threshold for readinessProbe|integer|1|
+|networkpolicy.enabled|Enable networkpolicy|string|false|
+|initContainers.enabled|Enable initContainers|string|false|
 
-### Jenkins Configuration parameters
-|Parameter|Description|Type|Default|
-|---------|-----------|----|-------|
-|jenkinsUsername|Jenkins username|string|user|
-|jenkinsPassword|Jenkins userpassword|string|admin1|
-|container.env.jenkinsHomepath|Jenkins home directory|string|/bitnami/jenkins/home|
-|container.env.jenkinsHost|Set Jenkins Host|string|jenkins.local|
 
-### Jenkins deployment parameters
-|Parameter|Description|Type|Default|
-|---------|-----------|----|-------|
-|serviceAccountName|Jenkins pod service account name|string|default|
-|containerPorts.http|Jenkins  HTTP container port|integer|8080|
-|containerPorts.https|Jenkins  HTTPs container port|integer|8443|
-|container.securityContext.runAsNonRoot|Set Jenkins container's Security Context runAsNonRoot|boolean|true|
-|container.securityContext.runAsUser|Set Jenkins container's Security Context runAsUser|integer|1001|
-|container.env.jenkinsHttp|Set Jenkins HTTP External port|integer|80|
-|container.env.jenkinsHttps|Set Jenkins HTTPs External port|integer|443|
-|startupProbe.failureThreshold|Failure threshold for startupProbe|integer|6|
-|startupProbe.initialDelaySeconds|Initial delay seconds for startupProbe|integer|180|
-|startupProbe.periodSeconds|Period seconds for startupProbe|integer|10|
-|startupProbe.successThreshold|Success threshold for startupProbe|integer|1|
-|startupProbe.timeoutSeconds|Timeout seconds for startupProbe|integer|5|
-|livenessProbe.initialDelaySeconds|Initial delay seconds for livenessProbe|integer|180|
-|livenessProbe.periodSeconds|Period seconds for livenessProbe|integer|10|
-|livenessProbe.timeoutSeconds|Timeout seconds for livenessProbe|integer|5|
-|livenessProbe.failureThreshold|Failure threshold for livenessProbe|integer|6|
-|livenessProbe.successThreshold|Success threshold for livenessProbe|integer|1|
-|readinessProbe.initialDelaySeconds|Initial delay seconds for readinessProbe|integer|30|
-|readinessProbe.periodSeconds|Period seconds for readinessProbe|integer|5|
-|readinessProbe.timeoutSeconds|Timeout seconds for readinessProbe|integer|3|
-|readinessProbe.failureThreshold|Failure seconds for readinessProbe|integer|3|
-|readinessProbe.successThreshold|Success seconds for readinessProbe|integer|1|
-|securityContext.runAsUser|Jenkins volumeMounts securityContext runAsUser|integer|1001|
-|ports.containerPort|Jenkins container port|integer|9118|
-|ports.livenessProbe.initialDelaySeconds|Initial delay seconds for livenessProbe volumeMounts|integer|15|
-|ports.livenessProbe.timeoutSeconds|Timeout seconds for livenessProbe volumeMounts|integer|5|
-|ports.readinessProbe.initialDelaySeconds|Initial delay seconds for readinessProbe volumeMounts|integer|5|
-|ports.readinessProbe.timeoutSeconds|Timeout seconds for readinessProbe volumeMounts|integer|1|
-|initContainers.enabled|Enable initContainers|boolean|false|
 
-### Traffic Exposure Parameters
-|Parameter|Description|Type|Default|
-|---------|-----------|----|-------|
-|service.http|Jenkins service HTTP port|integer|80|
-|service.https|Jenkins service HTTPs port|integer|443| 
-|ingress.enabled|Enable ingress record generation for Jenkins|boolea|false|
-|ingress.host|Default host for the ingress record|string|jenkins.local|
-|ingress.pathType|Ingress path type|string|ImplementationSpecific|
-
-### Persistence Parameters
-|Parameter|Description|Type|Default|
-|---------|-----------|----|-------|
-|persistentVolumeClaim.storage|Jenkins persistent volume size|string|8Gi|
-|persistentVolumeClaim.storageClassName|Jenkins storage class name|string|default|
-
-### Metrics Parameters
-|Parameter|Description|Type|Default|
-|---------|-----------|----|-------|
-|metrics.enabled|Start a sidecar prometheus exporter to expose Jenkins metrics|boolean|false|
-|metrics.serviceMonitor.enabled| |boolean|false|
-|metricsService.prometheus.io/port|Jenkins prometheus.io/port|integer|9122|
-|metricsService.port|Jenkins exporter service port|integer|9122|
-|metricsService.fsGroup|Set Jenkins Server pod's Security Context fsGroup|integer|1001|
-|resources.limits|The resources limits for the Jenkins container|string|{}|
-|resources.requests.cpu|Cpu for the Jenkins container|integer|300m|
-|resources.requests.memory|Memory for the Jenkins container|integer|512Mi|
