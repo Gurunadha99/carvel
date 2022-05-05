@@ -9,11 +9,16 @@ Configuration Reference
 
 You can configure the following:
 
-### Spark common parameters
+### Spark parameters
 
 |Parameter|Description|Type|Default|
 |---------|-----------|----|-------|
 |image.pullPolicy|MySQL image pull policy|string|IfNotPresent|
+
+### Spark master parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |master. replicas|set Master replicaset|integer|1|
 |master.configurationConfigMap|Set a custom configuration by using an existing configMap with the configuration file|integer|""|
 |master.webPort|Specify the port where the web interface will listen on the master over HTTP|integer|8080|
@@ -40,6 +45,11 @@ You can configure the following:
 |master.readinessProbe.timeoutSeconds|Timeout seconds for readinessProbe|integer|5|
 |master.readinessProbe.failureThreshold|Failure threshold for readinessProbe|integer|6|
 |master.readinessProbe.successThreshold|Success threshold for readinessProbe|integer|1|
+
+### Spark worker parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |worker.webPort|Specify the port where the web interface will listen on the worker over HTTP|integer|8081|
 |worker.webPortHttps|Specify the port where the web interface will listen on the worker over HTTPS|integer|8481|
 |worker.webPortWithQuotes|Specify the port with quotes where the web interface will listen on the master over HTTP|integer|"8081"|
@@ -67,6 +77,11 @@ You can configure the following:
 |worker.autoscaling.enabled|Enable replica autoscaling depending on CPU	|string|FALSE|
 |worker.autoscaling.CpuTargetPercentag|	Kubernetes HPA CPU target percentage|integer|50|
 |worker.autoscaling. replicasMax|Maximum number of workers when using autoscaling|integer|5|
+
+### Traffic Exposure parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |service.type	Kubernetes|Service type|string|ClusterIP|
 |service.clusterPort|Spark clusterport|integer|7077|
 |service.webPort|Spark client port for HTTP|integer|80|
@@ -79,4 +94,9 @@ You can configure the following:
 |ingress.enabled	|Enable ingress controller resource|strin|FALSE|
 |ingress.pathType|Ingress path type|string|ImplementationSpecific|
 |ingress. hostname|Default host for the ingress resource|string|spark.local|
+
+### Metrics parameters
+
+|Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |metrics.enabled|Enable metrics|string|FALSE|
