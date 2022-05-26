@@ -103,6 +103,7 @@ You can configure the following:
 
 
 |Parameter|Description|Type|Default|
+|---------|-----------|----|-------|
 |auth.adminPassword|InfluxDB admin user's password|string|mypassword|
 |auth.adminToken|nfluxDB admin-user-token|string|""|
 |pvc.storage|Size of data volume|string|8Gi|
