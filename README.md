@@ -1,5 +1,5 @@
 # carvel
-### InfluxDB
+## InfluxDB
 
 InfluxDB(TM) is an open source time-series database. It is a core component of the TICK (Telegraf, InfluxDB(TM), Chronograf, Kapacitor) stack.
 
